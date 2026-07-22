@@ -1,6 +1,7 @@
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const { PORT } = process.env
+const serverless=require("serverless-http")
 
 // Syncing all the models at once.
 conn.sync({ alter: true })
@@ -15,4 +16,4 @@ conn.sync({ alter: true })
     console.log("Error al sincronizar la bbdd: ",err);
   })
 
-  module.exports=server;  //el control lo tomará vercel
+  module.exports=serverless(server); 

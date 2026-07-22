@@ -11,8 +11,8 @@ server.use(morgan('dev'));
 server.use(cookieParser())
 
 server.use((req, res, next) => {
-    const urlFront=process.env.FRONTEND_URL || 'http://localhost:3000';
-    res.header('Access-Control-Allow-Origin',urlFront ); // update to match the domain you will make the request from
+    const origen = req.headers.origin;
+    res.header('Access-Control-Allow-Origin',origen||'*' ); // update to match the domain you will make the request from
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
