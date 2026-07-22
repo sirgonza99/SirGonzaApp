@@ -3,15 +3,29 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,DB_NAME, DB_PORT
+  DB_USER, DB_PASSWORD, DB_HOST,DB_NAME, DB_PORT, DATABASE_URL
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+if (DATABASE_URL) {
+  // Si existe DATABASE_URL (Producción en Vercel con Neon)
+  sequelize = new Sequelize(DATABASE_URL, {
+    logging: false, 
+    native: false, 
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false // Requerido por Neon para conexiones seguras en la nube
+      }
+    }
+  });
+} else {
+  // Si no existe (Desarrollo local en tu computadora)
+  sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`, {
+    logging: false, 
+    native: false, 
+  });
+}
 const basename = path.basename(__filename);
-
 const modelDefiners = [];
 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
