@@ -1,10 +1,10 @@
 [build]
   #Le decimos a Netlify dónde tiene que compilar React/Next.js
   base = "client"
-  publish = "out/server/app"
+  publish="out"
   command = "npm run build"
 
-  [functions]
+[functions]
   #'directory' en su propio bloque para poder salir correctamente de 'client'
   directory = "../api"
 
