@@ -3,6 +3,10 @@
   base = "client"
   command = "npm run build"
   
+[[plugins]]
+  #para next dinamico
+  package = "@netlify/plugin-nextjs"
+
 [functions]
   #'directory' en su propio bloque para poder salir correctamente de 'client'
   directory = "../api"
