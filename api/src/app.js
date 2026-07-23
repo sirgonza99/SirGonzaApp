@@ -10,9 +10,14 @@ server.use(express.json());
 server.use(morgan('dev'));
 server.use(cookieParser())
 
+const origins= ["http://localhost:3000","https://sirgonzaapp.netlify.app"]
+
 server.use((req, res, next) => {
-    const origen = req.headers.origin;
-    res.header('Access-Control-Allow-Origin',origen||'*' ); // update to match the domain you will make the request from
+    const origin=req.headers.origin;
+    if(origins.includes(origin)){
+        res.header('Access-Control-Allow-Origin',origin); 
+    }
+    
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
