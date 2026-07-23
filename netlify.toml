@@ -1,6 +1,7 @@
 [build]
   #Le decimos a Netlify dónde tiene que compilar React/Next.js
   base = "client"
+  publish = ".next"
   command = "npm run build"
   
 [[plugins]]
