@@ -10,7 +10,9 @@ server.use(express.json());
 server.use(morgan('dev'));
 server.use(cookieParser())
 
-const origins= ["http://localhost:3000","https://sirgonzaapp.netlify.app"]
+const {FRONTEND_URL}=process.env;
+
+const origins= ["http://localhost:3000", FRONTEND_URL]
 
 server.use((req, res, next) => {
     const origin=req.headers.origin;
@@ -21,6 +23,7 @@ server.use((req, res, next) => {
     res.header('Access-Control-Allow-Credentials', 'true');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+   
     next();
 });
 
