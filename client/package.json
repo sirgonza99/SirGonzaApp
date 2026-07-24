@@ -1,9 +1,9 @@
 {
-  "name": "next-client",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -25,6 +25,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "eslint": "^9",
-    "eslint-config-next": "15.4.7"
+    "eslint-config-next": "^16.2.11"
   }
 }
