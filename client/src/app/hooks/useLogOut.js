@@ -1,12 +1,15 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useLogOutMutation } from "@/redux/services/userApi";
+import { useState } from "react";
 
 export const useLogOut = () => {
+    const [isRedirecting,setIsRedirecting]=useState(false)
     const router = useRouter();
     const [logOut] = useLogOutMutation();
 
     const logout=async()=>{
+        setIsRedirecting(true);
         if ('serviceWorker' in navigator) {
             try {
                 // Tomamos el Service Worker que está corriendo actualmente
@@ -28,5 +31,6 @@ export const useLogOut = () => {
             console.log("Error al cerrar sesion: " + error.data);
         } 
     }
-    return {logout}
+
+    return {logout,isRedirecting}
 }

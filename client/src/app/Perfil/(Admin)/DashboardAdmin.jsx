@@ -1,7 +1,6 @@
-import { Menu } from 'antd';
+import { ConfigProvider, Menu, Spin } from 'antd';
 import styles from '@/ui/Dashboard.module.css';
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import { BellOutlined, CalendarOutlined, PoweroffOutlined, UserOutlined} from '@ant-design/icons';
 import AdminAppointments from './AdminAppointments';
 import Users from "./Users"
@@ -9,8 +8,7 @@ import Notifications from '../(User)/Notifications'
 import { useLogOut } from '@/app/hooks/useLogOut';
 
 const DashboardAdmin = () => {
-    const {logout}=useLogOut()
-    const router = useRouter();
+    const {logout,isRedirecting}=useLogOut()
 
     //items del menú de antd en un array 
     const items = [
@@ -70,7 +68,15 @@ const DashboardAdmin = () => {
             onClick: () => logout(),
         },
     ];
-
+    if (isRedirecting) {
+            return (
+                 <ConfigProvider theme={{ token: { colorPrimary: '#1eca00' } }}>
+                    <div style={{ display: "grid", placeContent: "center", height: "100vh", width: "100vw" }}>
+                        <Spin size="large" />
+                    </div>
+                </ConfigProvider>
+            );
+    }
     return (
         <div>
             <Menu 

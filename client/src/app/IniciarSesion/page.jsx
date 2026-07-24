@@ -5,6 +5,7 @@ import styles from "@/ui/Form.module.css";
 import { useRouter } from 'next/navigation';
 import swal from "sweetalert2";
 import Link from "next/link";
+import { Spin, ConfigProvider} from "antd";
 const PUBLIC_VAPID_KEY='BLi0bbWUXw3MjOQayCJ7T1_NhkSL-ypZ3R_GoTVQZM9Azs2Wex9m3abZ9HDRGMOahe02VlJgWAwbiXjpSrzm9zI'
 
 //para convertir el PUBLIC_VAPID_KEY de string a Uint8Array
@@ -37,8 +38,9 @@ const subscriptionWorker=async()=>{
 const LogIn=()=>{
     const [input,setInput]=useState({userName:"",password:""});
     const [errors,setErrors]=useState({})
-
     const[logIn]=useLogInMutation();
+    const [isRedirecting, setIsRedirecting] = useState(false);
+
     const[subscription]=useSubscriptionMutation();
     const router=useRouter();
     
@@ -50,6 +52,7 @@ const LogIn=()=>{
         e.preventDefault();
         //despacho la action para iniciar sesion  
         //si hay errores los guardo en el estado local
+        setIsRedirecting(true);
         try {
             //.unwrap() para poder capturar el error
             const user=await logIn(input).unwrap()
@@ -59,12 +62,12 @@ const LogIn=()=>{
                 const subs=await subscription({PS,id:user.id});
             } catch (error) {
                 console.log("Error de suscripcion: " + error.message);
-                
             }
             
             router.push("/Perfil")
 
         } catch (error) {    
+            setIsRedirecting(false)
             setErrors(JSON.parse(error.data));
             swal.fire({
                 title:"Hay errores!",
@@ -75,7 +78,16 @@ const LogIn=()=>{
             }) 
         }
     }
-
+    
+    if (isRedirecting) {
+        return (
+            <ConfigProvider theme={{ token: { colorPrimary: '#1eca00' } }}>
+                <div className={styles.spinContainer}>
+                    <Spin size="large"/>
+                </div>  
+            </ConfigProvider>
+        );
+    }
     return (
         <div className={styles.container}>
            <form className={styles.form} onSubmit={handleSubmit}>

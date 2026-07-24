@@ -3,7 +3,7 @@ import{createApi,fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 export const appointmentApi = createApi({
     reducerPath: 'appointmentAPI',
     baseQuery: fetchBaseQuery({
-        baseUrl:"/api/appointments/",
+        baseUrl:`${process.env.NEXT_PUBLIC_API_URL}/appointments/`,
         //para que funcionen las cookies(token)
         credentials:"include"
     }),

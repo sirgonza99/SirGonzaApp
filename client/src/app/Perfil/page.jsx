@@ -6,14 +6,14 @@ import DashboardAdmin from './(Admin)/DashboardAdmin'
 import CreateAppointment from "../Turnos/page"
 import { useLogOut } from '../hooks/useLogOut';
 import { useSelector } from 'react-redux';
-import { Menu, Modal } from 'antd';
+import { ConfigProvider, Menu, Modal, Spin } from 'antd';
 import { BellOutlined, CalendarOutlined, EditOutlined, LockOutlined, PoweroffOutlined } from '@ant-design/icons';
 import Notifications from './(User)/Notifications'
 import Register from '../Registrarse/page';
 import ChangePassword from './(User)/ChangePassword';
 
 function Profile() {
-    const {logout}=useLogOut();
+    const {logout,isRedirecting}=useLogOut();
     const [isModalReqAppointmentOpen, setIsModalReqAppointmentOpen] = useState(false);
     const [isModalEditProfileOpen, setIsModalEditProfileOpen] = useState(false);
     const [isModalChangePasswordOpen, setIsModalChangePasswordOpen]=useState(false)
@@ -71,7 +71,15 @@ function Profile() {
         }
     ];
     if(user==null) return null;
-
+    if (isRedirecting) {
+            return (
+                 <ConfigProvider theme={{ token: { colorPrimary: '#1eca00' } }}>
+                    <div style={{ display: "grid", placeContent: "center", height: "100vh", width: "100vw" }}>
+                        <Spin size="large" />
+                    </div>
+                </ConfigProvider>
+            );
+    }
     return user?.admin
             ? <DashboardAdmin/>
             :<div>

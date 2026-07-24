@@ -3,7 +3,7 @@ import{createApi,fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 export const notificationsApi = createApi({
     reducerPath: 'notificationsApi',
     baseQuery: fetchBaseQuery({
-        baseUrl:"/api/notifications/",
+        baseUrl:`${process.env.NEXT_PUBLIC_API_URL}/notifications/`,
         //para que funcionen las cookies(token)
         credentials:"include"
     }),

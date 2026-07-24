@@ -152,6 +152,11 @@
     grid-column-start: span 5;
     height: 1em;
 }
+.spinContainer {
+  display: grid;
+  place-content: center;
+  height: 100vh;
+}
 
 /* RESPONSIVE */
 
