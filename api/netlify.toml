@@ -1,7 +1,7 @@
 [build]
     functions = "netlify/functions"
 [functions]
-    external_node_modules = ["express", "pg", "sequelize"]
+    node_bundler="esbuild"
 [[redirects]]
     from = "/api/*"
     to = "/.netlify/functions/index/:splat"

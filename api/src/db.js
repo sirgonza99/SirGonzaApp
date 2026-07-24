@@ -2,6 +2,8 @@ require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
+const pg=require("pg")
+
 const {
   DB_USER, DB_PASSWORD, DB_HOST,DB_NAME, DB_PORT, DATABASE_URL
 } = process.env;
@@ -11,6 +13,8 @@ if (DATABASE_URL) {
   sequelize = new Sequelize(DATABASE_URL, {
     logging: false, 
     native: false, 
+    dialect:'postgres',
+    dialectModule:pg,
     dialectOptions: {
       ssl: {
         require: true,
