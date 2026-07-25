@@ -15,9 +15,9 @@ export function middleware(request) {
 
     // Si NO está logueado e intenta ir a Perfil, va a la home
     
-    if (!userCookie && pathname === "/Perfil") {
-        return NextResponse.redirect(new URL("/", request.url));
-    }
+    // if (!userCookie && pathname === "/Perfil") {
+    //     return NextResponse.redirect(new URL("/", request.url));
+    // }
 
     return NextResponse.next();
 }

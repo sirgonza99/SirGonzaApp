@@ -6,7 +6,6 @@ import Cookies from 'js-cookie';
 const initialState = {
   admin: null,
   user: null,
-  isLogged:false
 };
 
 const userSlice = createSlice({
@@ -20,7 +19,6 @@ const userSlice = createSlice({
 
       state.user = user;
       state.admin = admin;
-      state.isLogged=userCookie?true:false
     }
   },
   extraReducers: (builder) => {
@@ -31,7 +29,6 @@ const userSlice = createSlice({
         (state) => {
           state.user = null;
           state.admin = null;
-          state.isLogged=false;
         }
       )
       // ESCUCHA EL LOGIN exitoso 
@@ -44,7 +41,6 @@ const userSlice = createSlice({
 
           state.user = user;
           state.admin = admin;
-          state.isLogged=true
         }
       )
       .addMatcher(

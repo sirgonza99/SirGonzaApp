@@ -165,20 +165,20 @@ const CreateAppointment = ({ admin, isToEdit = false, appointment= null,isUser=f
                 <p>{errors.lastname}</p>
 
                 <div>
+                    <label>Número de celular</label>
                     <div>
-                        <label>Número de celular</label>
                         <label>11</label>
+                        <input 
+                            type="tel"
+                            name="phoneNumber"
+                            placeholder="22334455"
+                            inputMode="numeric"
+                            maxLength="8"
+                            value={input.phoneNumber}
+                            onChange={handleChange}
+                            disabled={isToEdit||isUser} 
+                        />
                     </div>
-                    <input 
-                        type="tel"
-                        name="phoneNumber"
-                        placeholder="22334455"
-                        inputMode="numeric"
-                        maxLength="8"
-                        value={input.phoneNumber}
-                        onChange={handleChange}
-                        disabled={isToEdit||isUser} 
-                    />
                 </div> 
                 <p>{errors.phoneNumber}</p>
 
