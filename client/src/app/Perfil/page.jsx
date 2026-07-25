@@ -81,6 +81,7 @@ function Profile() {
                 </ConfigProvider>
             );
     }
+
     return user?.admin
             ? <DashboardAdmin/>
             :<div>
@@ -97,8 +98,8 @@ function Profile() {
                     footer={null}
                 >
                     <CreateAppointment
-                        key={user.id}
-                        appointment={{userId:user.id,...user}}
+                        key={user?.id}
+                        appointment={{userId:user?.id,...user}}
                         isUser={true}
                         //le paso la funcion para cerrar el modal por prop
                         closeModal={()=>setIsModalReqAppointmentOpen(false)}
@@ -127,7 +128,7 @@ function Profile() {
                     footer={null}
                 >
                     <ChangePassword
-                        id={user.id}
+                        id={user?.id}
                         closeModal={()=>setIsModalChangePasswordOpen(false)}
                     />
                 </Modal>
