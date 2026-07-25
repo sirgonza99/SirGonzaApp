@@ -20,10 +20,11 @@ function Profile() {
 
     const router=useRouter()
     //obtengo los datos del usuario guardado en el estado de redux
-    const user= useSelector(state=>state.user.user)  
+    const {isLogged,user}= useSelector(state=>state.user)  
+    
     if(user) {var {pushSubscription, admin, ...userToEdit}=user};
     //al renderizar el componente si el usuario es nulo se redirige al inicio despues de retornar null
-    useEffect(()=>{if(user==null) router.push('/')},[])
+    useEffect(()=>{if(!isLogged) router.push('/IniciarSesion')},[isLogged,router])
     
     //items del menú de antd en un array 
     const items = [
@@ -70,7 +71,7 @@ function Profile() {
             onClick: () => logout(),
         }
     ];
-    if(user==null) return null;
+   
     if (isRedirecting) {
             return (
                  <ConfigProvider theme={{ token: { colorPrimary: '#1eca00' } }}>

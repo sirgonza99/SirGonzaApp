@@ -56,6 +56,7 @@ const LogIn=()=>{
         try {
             //.unwrap() para poder capturar el error
             const user=await logIn(input).unwrap()
+            
             try {
                 //push subscription
                 const PS = await subscriptionWorker(); 

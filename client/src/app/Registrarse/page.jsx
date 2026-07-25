@@ -96,19 +96,20 @@ function Register({isToEdit=false, user=null, closeModal=null}) {
                 <p>{errors.lastname}</p>
                 
                 <div>
+                    <label>Numero de celular: </label>
                     <div>
-                        <label>Numero de celular: </label>
                         <label>11</label>
-                    </div>
-                    <input 
-                        type="tel" 
-                        name="phoneNumber" 
-                        value={input.phoneNumber} 
-                        placeholder='22334455' 
-                        inputMode="numeric"
-                        maxLength="8"
-                        onChange={handleChange}
-                    />
+                        <input 
+                            type="tel" 
+                            name="phoneNumber" 
+                            value={input.phoneNumber} 
+                            placeholder='22334455' 
+                            inputMode="numeric"
+                            maxLength="8"
+                            onChange={handleChange}
+                        />
+                    </div>   
+                    
                 </div>
                 <p>{errors.phoneNumber}</p>
 

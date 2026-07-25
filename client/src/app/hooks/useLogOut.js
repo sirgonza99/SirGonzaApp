@@ -26,7 +26,6 @@ export const useLogOut = () => {
             
         try{
             await logOut().unwrap();
-            router.push("/IniciarSesion");
         } catch (error) {
             console.log("Error al cerrar sesion: " + error.data);
         } 
