@@ -59,7 +59,7 @@ const CreateAppointment = ({ admin, isToEdit = false, appointment= null,isUser=f
         }
         return times;
     };    
-    const times = timesGenerator(10, 3).concat(timesGenerator(17, 5));
+    const times = timesGenerator(10, 3).concat(timesGenerator(15, 5));
 
     const handleChange = (e) => {
         if (e.target.name === "date_en") {
