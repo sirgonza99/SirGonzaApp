@@ -26,7 +26,7 @@ const CreateAppointment = ({ admin, isToEdit = false, appointment= null,isUser=f
     today.setMonth(today.getMonth() + 1);
     const maxDate = today.toISOString().split('T')[0];
     
-    const { data: appointments, isLoading, refetch } = useGetAppointmentsQuery();
+    const { data: appointments, refetch } = useGetAppointmentsQuery();
     const [createAppointment] = usePostAppointmentsMutation();  
     const [putAppointment] = usePutAppointmentMutation(); // Tu mutación para actualizar
 
@@ -59,9 +59,7 @@ const CreateAppointment = ({ admin, isToEdit = false, appointment= null,isUser=f
         }
         return times;
     };    
-    const times = timesGenerator(10, 3).concat(timesGenerator(17, 3));
-
-    if (isLoading) return <p color="yellow">Cargandoooooo</p>;
+    const times = timesGenerator(10, 3).concat(timesGenerator(17, 5));
 
     const handleChange = (e) => {
         if (e.target.name === "date_en") {

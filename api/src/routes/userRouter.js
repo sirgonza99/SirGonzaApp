@@ -7,6 +7,9 @@ const {subscription}=require('../utils/webPush');
 const Cookies=require('cookie-parser')
 const userRouter=Router();
 
+//true si esta en produccion sino false
+const isProduction=process.env.isProduction==="true";
+
 //ruta post para loguearse
 userRouter.post('/logIn',async(req,res)=>{
     try {
@@ -16,14 +19,14 @@ userRouter.post('/logIn',async(req,res)=>{
         res
             .cookie('user',JSON.stringify(publicUser),{
                 httpOnly:false,
-                sameSite:'lax',
-                secure:false,
+                sameSite:isProduction? "none" : "lax",
+                secure:isProduction,
                 maxAge:month
         })
             .cookie('access_token',result.token,{
                 httpOnly:true, //la cookie solo se puede acceder desde el servidor
-                sameSite:'lax',
-                secure: false,
+                sameSite:isProduction?"none" : "lax",
+                secure: isProduction,
                 maxAge:month
             })
             .status(201).json(publicUser);
@@ -38,13 +41,13 @@ userRouter.post('/logIn',async(req,res)=>{
 userRouter.post('/admin/logout',async(req,res)=>{
     res.clearCookie('access_token',{
         httpOnly: true,
-        sameSite:'lax',
-        secure:false
+        sameSite:isProduction?"none":"lax",
+        secure:isProduction
     })
     res.clearCookie('user',{
         httpOnly: false,
-        sameSite:'lax',
-        secure:false
+        sameSite:isProduction?"none":"lax",
+        secure:isProduction
     })
     .status(200).json("Sesión Cerrada")
 })

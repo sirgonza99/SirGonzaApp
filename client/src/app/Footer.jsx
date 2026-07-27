@@ -27,7 +27,7 @@ export default function Footer() {
                 <Col xs={24} sm={12} md={8}>
                     <Title level={5} className={styles.footerTitle}>HORARIOS</Title>
                     <Paragraph className={styles.footerText}>
-                        Martes a Sábados: 10:00 a 20:00 hs.
+                        Martes a Sábados: 10:00 hs a 13:00 hs / 15:00 hs a 20:00 hs.
                     </Paragraph>
                 </Col>
 
